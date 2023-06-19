@@ -33,6 +33,7 @@ module uvmt_cv32e40s_tb;
    import cv32e40s_pkg::*;
    import uvmt_cv32e40s_base_test_pkg::*;
    import uvmt_cv32e40s_pkg::*;
+   import support_pkg::*;
    `ifdef USE_ISS
    `ifndef FORMAL
    import rvviApiPkg::*;
@@ -135,7 +136,7 @@ module uvmt_cv32e40s_tb;
                               .*);
 
   bind cv32e40s_wrapper
-    uvma_rvfi_instr_if_t#(uvmt_cv32e40s_base_test_pkg::ILEN,
+    uvma_rvfi_instr_if_t #(uvmt_cv32e40s_base_test_pkg::ILEN,
                           uvmt_cv32e40s_base_test_pkg::XLEN) rvfi_instr_if(.clk(clk_i),
                                                                    .reset_n(rst_ni),
 
@@ -1568,9 +1569,10 @@ module uvmt_cv32e40s_tb;
 
     // Support Logic
 
-    bind cv32e40s_wrapper uvmt_cv32e40s_support_logic u_support_logic(.rvfi(rvfi_instr_if),
-                                                                      .in_support_if (support_logic_module_i_if.driver_mp),
-                                                                      .out_support_if (support_logic_module_o_if.master_mp)
+     bind cv32e40s_wrapper uvmt_cv32e40s_support_logic u_support_logic(
+                                                                       .rvfi(rvfi_instr_if),
+                                                                       .in_support_if (support_logic_module_i_if.driver_mp),
+                                                                       .out_support_if (support_logic_module_o_if.master_mp)
                                                                       );
 
 

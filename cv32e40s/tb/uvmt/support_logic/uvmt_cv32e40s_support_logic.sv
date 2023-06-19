@@ -20,11 +20,14 @@ module uvmt_cv32e40s_support_logic
   import cv32e40s_pkg::*;
   import uvmt_cv32e40s_pkg::*;
   import uvma_rvfi_pkg::*;
+  import support_pkg::*;
   import uvmt_cv32e40s_base_test_pkg::*;
   (
+  
     uvma_rvfi_instr_if_t rvfi,
     uvmt_cv32e40s_support_logic_module_i_if_t.driver_mp in_support_if,
     uvmt_cv32e40s_support_logic_module_o_if_t.master_mp out_support_if
+
   );
 
 
@@ -82,8 +85,19 @@ module uvmt_cv32e40s_support_logic
 
 
   // ---------------------------------------------------------------------------
+  // Decode rvfi
+  // ---------------------------------------------------------------------------
+  //  Signal with decoded instruction
+  asm_t  rvfi_instr_decoded;
+
+  always_comb begin
+    rvfi_instr_decoded    <= decode_instr(rvfi.rvfi_insn);
+  end
+
+  // ---------------------------------------------------------------------------
   // Support logic blocks
   // ---------------------------------------------------------------------------
+
 
 
   // Check if a new obi data req arrives after an exception is triggered.
